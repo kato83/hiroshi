@@ -2,6 +2,7 @@
   "compilerOptions": {
     "target": "ESNext",
     "useDefineForClassFields": true,
+    "noImplicitAny": false,
     "module": "ESNext",
     "lib": [
       "ESNext",

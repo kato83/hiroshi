@@ -2,11 +2,12 @@
   "name": "mellow_js",
   "version": "0.0.1",
   "description": "",
-  "main": "index.ts",
+  "main": "index.tsx",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "tsc --project tsconfig.vite.json && vite build",
+    "tsc": "tsc --project tsconfig.build.json",
     "preview": "vite preview"
   },
   "repository": {

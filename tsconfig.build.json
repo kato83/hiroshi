@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "sourceMap": true,
+    // TSはECMAScript 5に変換
+    "target": "ES3",
+    // TSのモジュールはES Modulesとして出力
+    "module": "UMD",
+    "moduleResolution": "node",
+    "lib": [
+      "ES2020",
+      "DOM"
+    ],
+    "jsx": "react",
+    "jsxFactory": "createElement",
+    "jsxFragmentFactory": "createFragment",
+    "baseUrl": ".",
+    "skipLibCheck": true
+  },
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

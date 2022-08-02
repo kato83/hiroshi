@@ -37,7 +37,7 @@ export const createFragment = () => document.createDocumentFragment();
 /**
  * キャメルケースからHTML属性のケバブケースに変換する
  */
-export const camel2KebabCase = str => str.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`);
+export const camel2KebabCase = (str: string) => str.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`);
 
 export const sample = () => <>
     <div class='a'>sample</div>
