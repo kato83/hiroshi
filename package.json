@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc --project tsconfig.vite.json && vite build",
+    "build": "tsc --project tsconfig.json && vite build",
     "tsc": "tsc --project tsconfig.build.json",
     "preview": "vite preview"
   },

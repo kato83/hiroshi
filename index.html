@@ -9,11 +9,14 @@
 <body>
 <div id="app"></div>
 <script type="module">
-    import {createElement as c, createFragment, sample} from './src';
+    import {createElement as h} from './src/index.ts';
 
-    const elm = c(createFragment(), {}, [c('p', {}, c('span', {}, ['sample']))]);
-    document.body.appendChild(elm);
-    document.body.append(sample());
+    const element = h('div', null, ...[
+        h('button', {type: 'button', onClick: (e) => console.log(e)}, 'TEST'),
+        h('div', null, 'TEST'),
+    ]);
+
+    document.body.append(element);
 </script>
 </body>
 </html>
