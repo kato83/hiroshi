@@ -1,5 +1,5 @@
 {
-  "name": "hiroshijs",
+  "name": "hiroshi",
   "version": "0.0.1",
   "description": "jsx support simply dom builder",
   "main": "dist/index.js",
@@ -12,15 +12,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kato83/hiroshijs.git"
+    "url": "git+https://github.com/kato83/hiroshi.git"
   },
   "keywords": [],
   "author": "Yuki Kato <katomeganeb83@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/kato83/hiroshijs/issues"
+    "url": "https://github.com/kato83/hiroshi/issues"
   },
-  "homepage": "https://github.com/kato83/hiroshijs#readme",
+  "homepage": "https://github.com/kato83/hiroshi#readme",
   "devDependencies": {
     "minify": "^9.1.0",
     "typescript": "^4.7.4",
