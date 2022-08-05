@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8"/>
-    <link rel="icon" type="image/svg+xml" href="/vite.svg"/>
+    <link rel="icon" href="data:,">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Vite + TS</title>
 </head>
@@ -12,8 +12,17 @@
     import {createElement as h} from './src/index.ts';
 
     const element = h('div', null, ...[
-        h('button', {type: 'button', onClick: (e) => console.log(e)}, 'TEST'),
-        h('div', null, 'TEST'),
+        h(
+            'button',
+            {
+                type: 'button',
+                onClick: (e) => console.log(e),
+                style: {marginBottom: '1rem', background: '#ffccaa'}
+            },
+            'TEST'
+        ),
+        h('div', null, ...['aa', 'bb'].map(item => h('p', null, item))),
+        h('div', {style: 'background: #ffccaa'}, 'TEST'),
     ]);
 
     document.body.append(element);

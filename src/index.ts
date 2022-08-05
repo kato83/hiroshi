@@ -1,4 +1,20 @@
+/**!
+ * @license Yuki Kato
+ * Hiroshi JS
+ * Copyright (c) Kato83.
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+/**
+ * rest parameter type
+ */
 type Children = string & string[] & Node & Node[];
+
+const attributeMapping = (key: string) => ({
+    className: 'class',
+    htmlFor: 'for',
+})[key] ?? key;
 
 /**
  * Build element.
@@ -19,13 +35,21 @@ export const createElement = (
             && attribute.length > 2
             && attribute[2].toUpperCase() === attribute[2]) {
             elm.addEventListener(
-                attribute.substr(2).toLowerCase(),
-                attributes[attribute]);
+                attribute.substring(2).toLowerCase(),
+                attributes[attribute] as  EventListenerOrEventListenerObject);
         } else {
-            const name = attribute === 'className' ? 'class' : attribute;
-            elm.setAttribute(
-                camel2KebabCase(name),
-                attributes[attribute]);
+            const value = attributes[attribute];
+            if (typeof value === 'undefined' || value === null) {
+                elm.removeAttribute(attribute);
+            } else if (attribute === 'style' && typeof value === 'object') {
+                for (const property in value) {
+                    (elm as HTMLElement).style[property] = value[property];
+                }
+            } else {
+                elm.setAttribute(
+                    camel2KebabCase(attributeMapping(attribute)),
+                    value as string);
+            }
         }
     }
 

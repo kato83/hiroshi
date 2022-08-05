@@ -10,6 +10,8 @@
       "ES2020",
       "DOM"
     ],
+    "outDir": "./dist",
+    "declaration": true,
     "jsx": "react",
     "jsxFactory": "createElement",
     "jsxFragmentFactory": "createFragment",

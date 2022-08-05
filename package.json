@@ -1,27 +1,28 @@
 {
-  "name": "mellow_js",
+  "name": "hiroshijs",
   "version": "0.0.1",
-  "description": "",
-  "main": "index.tsx",
+  "description": "jsx support simply dom builder",
+  "main": "dist/index.js",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc --project tsconfig.json && vite build",
-    "tsc": "tsc --project tsconfig.build.json",
-    "preview": "vite preview"
+    "tsc": "tsc --project tsconfig.build.json && minify 'dist/index.js' > 'dist/index.min.js'",
+    "preview": "vite preview",
+    "prepublishOnly": "npm run tsc"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kato83/mellowjs.git"
+    "url": "git+https://github.com/kato83/hiroshijs.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Yuki Kato <katomeganeb83@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/kato83/mellow_js/issues"
+    "url": "https://github.com/kato83/hiroshijs/issues"
   },
-  "homepage": "https://github.com/kato83/mellow_js#readme",
+  "homepage": "https://github.com/kato83/hiroshijs#readme",
   "devDependencies": {
+    "minify": "^9.1.0",
     "typescript": "^4.7.4",
     "vite": "^3.0.4"
   }
