@@ -4,7 +4,7 @@
     // TSはECMAScript 5に変換
     "target": "ES3",
     // TSのモジュールはES Modulesとして出力
-    "module": "UMD",
+    "module": "ES6",
     "moduleResolution": "node",
     "lib": [
       "ES2020",

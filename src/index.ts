@@ -1,9 +1,6 @@
 /**!
- * @license Yuki Kato
- * Hiroshi JS
- * Copyright (c) Kato83.
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
+ * @license Hiroshi JS | Copyright (c) Kato83.
+ * https://github.com/kato83/hiroshi/blob/master/LICENSE.txt
  */
 
 /**
@@ -36,19 +33,19 @@ export const createElement = (
             && attribute[2].toUpperCase() === attribute[2]) {
             elm.addEventListener(
                 attribute.substring(2).toLowerCase(),
-                attributes[attribute] as  EventListenerOrEventListenerObject);
+                attributes[attribute] as EventListenerOrEventListenerObject);
         } else {
             const value = attributes[attribute];
-            if (typeof value === 'undefined' || value === null) {
-                elm.removeAttribute(attribute);
-            } else if (attribute === 'style' && typeof value === 'object') {
+            if (attribute === 'style' && typeof value === 'object') {
                 for (const property in value) {
                     (elm as HTMLElement).style[property] = value[property];
                 }
-            } else {
+            } else if (typeof value !== 'undefined'
+                && value !== null
+                && value !== false) {
                 elm.setAttribute(
                     camel2KebabCase(attributeMapping(attribute)),
-                    value as string);
+                    value === true ? '' : value as string);
             }
         }
     }

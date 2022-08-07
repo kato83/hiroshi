@@ -1,14 +1,15 @@
 {
   "name": "hiroshi",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "jsx support simply dom builder",
-  "main": "dist/index.js",
+  "main": "dist/esm/index.js",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "tsc": "tsc --project tsconfig.build.json && minify 'dist/index.js' > 'dist/index.min.js'",
     "preview": "vite preview",
-    "prepublishOnly": "npm run tsc"
+    "prepublishOnly": "npm build",
+    "build": "rollup -c"
   },
   "repository": {
     "type": "git",
@@ -22,8 +23,23 @@
   },
   "homepage": "https://github.com/kato83/hiroshi#readme",
   "devDependencies": {
+    "@babel/core": "^7.18.10",
+    "@babel/preset-env": "^7.18.10",
+    "@rollup/plugin-babel": "^5.3.1",
+    "@rollup/plugin-commonjs": "^22.0.2",
+    "@rollup/plugin-node-resolve": "^13.3.0",
+    "@rollup/plugin-typescript": "^8.3.4",
+    "babel-preset-es2015-rollup": "^3.0.0",
+    "core-js": "^3.24.1",
     "minify": "^9.1.0",
+    "rollup": "^2.77.2",
+    "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-json": "^4.0.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-terser": "^7.0.2",
     "typescript": "^4.7.4",
     "vite": "^3.0.4"
-  }
+  },
+  "dependencies": {}
 }
