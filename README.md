@@ -17,12 +17,12 @@ It can be used in a wide variety of projects and situations, as it focuses solel
 It can be used from the following cdn and others.
 
 https://cdn.jsdelivr.net/npm/hiroshi@latest/dist/umd/hiroshi.js  
-https://unpkg.com/browse/hiroshi@latest/dist/umd/hiroshi.js 
+https://unpkg.com/hiroshi@latest/dist/umd/hiroshi.js
 
 ```html
-<script src="https://unpkg.com/browse/hiroshi@latest/dist/umd/hiroshi.js"></script>
+<script src="https://unpkg.com/hiroshi@latest/dist/umd/hiroshi.js"></script>
 <script type="text/javascript">
-  const c = hiroshi.createElement;
+  const c = Hiroshi.createElement;
   const dom = c('div', {className: 'hiroshi', id: '#app'}, ...[
     c('button', {onClick: (e) => alert('Click a button.')}, 'Click me.'),
     c('div', {style: {background: '#cccccc', maxWidth: '20rem'}}, 'Apply style.'),

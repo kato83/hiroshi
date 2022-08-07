@@ -17,7 +17,7 @@ DOM を作成することのみに焦点を当てているため、様々な案�
 以下の CDN 等から使用できます。
 
 https://cdn.jsdelivr.net/npm/hiroshi@latest/dist/umd/hiroshi.js  
-https://unpkg.com/browse/hiroshi@latest/dist/umd/hiroshi.js
+https://unpkg.com/hiroshi@latest/dist/umd/hiroshi.js
 
 ```html
 <script src="https://unpkg.com/browse/hiroshi@latest/dist/umd/hiroshi.js"></script>
