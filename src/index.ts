@@ -3,11 +3,6 @@
  * https://github.com/kato83/hiroshi/blob/master/LICENSE.txt
  */
 
-/**
- * rest parameter type
- */
-type Children = string & string[] & Node & Node[];
-
 const attributeMapping = (key: string) => ({
     className: 'class',
     htmlFor: 'for',
@@ -24,7 +19,7 @@ const isNotNullable = arg => typeof arg !== 'undefined' && arg !== null;
 export const createElement = (
     nodeName: string | (() => Element),
     attributes: { [p: string]: unknown } = {},
-    ...children: Children[]
+    ...children: any
 ): Node => {
     const elm = (typeof nodeName === 'string') ? document.createElement(nodeName)
         : nodeName.apply(null) as Element;
@@ -48,17 +43,18 @@ export const createElement = (
         }
     }
 
-    const displayChildren = c => isNotNullable(c) && typeof c !== 'boolean';
-    elm.append(...children.filter(displayChildren));
+    const displayChildren = children.flat()
+        .filter(c => isNotNullable(c) && typeof c !== 'boolean');
+    elm.append(...displayChildren);
     return elm;
 };
 
 /**
  * create document fragment.
  */
-export const createFragment = () => document.createDocumentFragment();
+export const Fragment = () => document.createDocumentFragment();
 
 /**
  * convert camel case to kebab case.
  */
-export const camel2KebabCase = (str: string) => str.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`);
+const camel2KebabCase = (str: string) => str.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`);
