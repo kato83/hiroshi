@@ -20,7 +20,7 @@ https://cdn.jsdelivr.net/npm/hiroshi@latest/dist/umd/hiroshi.js
 https://unpkg.com/hiroshi@latest/dist/umd/hiroshi.js
 
 ```html
-<script src="https://unpkg.com/browse/hiroshi@latest/dist/umd/hiroshi.js"></script>
+<script src="https://unpkg.com/hiroshi@latest/dist/umd/hiroshi.js"></script>
 <script type="text/javascript">
   const c = hiroshi.createElement;
   const dom = c('div', {className: 'hiroshi', id: '#app'}, ...[
