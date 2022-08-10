@@ -10,14 +10,26 @@ But it is a library dedicated to generating very lightweight and simple dom obje
 
 It can be used in a wide variety of projects and situations, as it focuses solely on creating dom.
 
-## Usage
+## CDN
 
-### UMD format.
-
-It can be used from the following cdn and others.
-
+```text
+▼ UMD format
 https://cdn.jsdelivr.net/npm/hiroshi@latest/dist/umd/hiroshi.js  
 https://unpkg.com/hiroshi@latest/dist/umd/hiroshi.js
+▼ ESM format
+https://cdn.jsdelivr.net/npm/hiroshi@latest/dist/esm/hiroshi.js  
+https://unpkg.com/hiroshi@latest/dist/esm/hiroshi.js
+```
+
+## Usage
+
+A sample of JSX in action can be seen below.
+
+[Hiroshi JS Example for ES Module x JSX](https://codepen.io/kato83/pen/zYWLPMP)
+
+Below is a sample without JSX compilation.
+
+### UMD format.
 
 ```html
 <script src="https://unpkg.com/hiroshi@latest/dist/umd/hiroshi.js"></script>

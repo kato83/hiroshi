@@ -3,12 +3,16 @@
  * https://github.com/kato83/hiroshi/blob/master/LICENSE.txt
  */
 
-const attributeMapping = (key: string) => ({
-    className: 'class',
-    htmlFor: 'for',
-})[key] ?? key;
+const builtinEventMapping = (key: string) =>
+    (isMaybeEvent(key)) ?
+        key.toLowerCase() :
+        {
+            // If special dom property mappings are required, they should be added.
+        }[key] ?? key;
 
 const isNotNullable = arg => typeof arg !== 'undefined' && arg !== null;
+
+const isMaybeEvent = key => key.startsWith('on') && key[2];
 
 /**
  * Build element.
@@ -26,19 +30,27 @@ export const createElement = (
 
     for (const attribute in attributes) {
         const value = attributes[attribute];
-        if (attribute.startsWith('on')
-            && attribute[2]
-            && attribute[2].toUpperCase() === attribute[2]) {
-            elm.addEventListener(
-                attribute.substring(2).toLowerCase(),
-                value as EventListenerOrEventListenerObject);
-        } else if (attribute === 'style' && typeof value === 'object') {
+
+        // style property
+        if (attribute === 'style' && typeof value === 'object') {
             for (const property in value) {
                 (elm as HTMLElement).style[property] = value[property];
             }
-        } else if (isNotNullable(value) && value !== false) {
+        }
+        // builtin event property
+        else if (typeof elm[builtinEventMapping(attribute)] !== 'undefined') {
+            elm[builtinEventMapping(attribute)] = value;
+        }
+        // custom event property
+        else if (isMaybeEvent(attribute)) {
+            elm.addEventListener(
+                attribute.substring(2),
+                value as EventListenerOrEventListenerObject);
+        }
+        // other attribute (aria-*, data-* attribute, etc.)
+        else if (isNotNullable(value) && value !== false) {
             elm.setAttribute(
-                camel2KebabCase(attributeMapping(attribute)),
+                camel2KebabCase(attribute),
                 value === true ? '' : value as string);
         }
     }

@@ -10,14 +10,26 @@ React や Preact、Vue.js のような状態遷移を保持する仮想 DOM の�
 
 DOM を作成することのみに焦点を当てているため、様々な案件やシチュエーションで使用することが出来ます。
 
-## 使い方
+## CDN
 
-### UMD format.
-
-以下の CDN 等から使用できます。
-
+```text
+▼ UMD format
 https://cdn.jsdelivr.net/npm/hiroshi@latest/dist/umd/hiroshi.js  
 https://unpkg.com/hiroshi@latest/dist/umd/hiroshi.js
+▼ ESM format
+https://cdn.jsdelivr.net/npm/hiroshi@latest/dist/esm/hiroshi.js  
+https://unpkg.com/hiroshi@latest/dist/esm/hiroshi.js
+```
+
+## 使い方
+
+JSX を実際に使用したサンプルは以下から確認できます。
+
+[Hiroshi JS Example for ES Module x JSX](https://codepen.io/kato83/pen/zYWLPMP)
+
+以下は JSX コンパイルを使用しない場合のサンプルです。
+
+### UMD format.
 
 ```html
 <script src="https://unpkg.com/hiroshi@latest/dist/umd/hiroshi.js"></script>
