@@ -8,7 +8,7 @@
     "dev": "vite",
     "tsc": "tsc --project tsconfig.build.json && minify 'dist/index.js' > 'dist/index.min.js'",
     "preview": "vite preview",
-    "prepublishOnly": "npm build",
+    "prepublishOnly": "npm run build",
     "build": "rollup -c"
   },
   "repository": {
