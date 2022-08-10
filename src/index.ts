@@ -13,6 +13,8 @@ const attributeMapping = (key: string) => ({
     htmlFor: 'for',
 })[key] ?? key;
 
+const isNotNullable = arg => typeof arg !== 'undefined' && arg !== null;
+
 /**
  * Build element.
  * @param nodeName element name or Component function
@@ -28,29 +30,26 @@ export const createElement = (
         : nodeName.apply(null) as Element;
 
     for (const attribute in attributes) {
+        const value = attributes[attribute];
         if (attribute.startsWith('on')
-            && attribute.length > 2
+            && attribute[2]
             && attribute[2].toUpperCase() === attribute[2]) {
             elm.addEventListener(
                 attribute.substring(2).toLowerCase(),
-                attributes[attribute] as EventListenerOrEventListenerObject);
-        } else {
-            const value = attributes[attribute];
-            if (attribute === 'style' && typeof value === 'object') {
-                for (const property in value) {
-                    (elm as HTMLElement).style[property] = value[property];
-                }
-            } else if (typeof value !== 'undefined'
-                && value !== null
-                && value !== false) {
-                elm.setAttribute(
-                    camel2KebabCase(attributeMapping(attribute)),
-                    value === true ? '' : value as string);
+                value as EventListenerOrEventListenerObject);
+        } else if (attribute === 'style' && typeof value === 'object') {
+            for (const property in value) {
+                (elm as HTMLElement).style[property] = value[property];
             }
+        } else if (isNotNullable(value) && value !== false) {
+            elm.setAttribute(
+                camel2KebabCase(attributeMapping(attribute)),
+                value === true ? '' : value as string);
         }
     }
 
-    elm.append(...children);
+    const displayChildren = c => isNotNullable(c) && typeof c !== 'boolean';
+    elm.append(...children.filter(displayChildren));
     return elm;
 };
 
