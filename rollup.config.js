@@ -21,8 +21,6 @@ export default [
             nodeResolve({main: true}),
             // CommonJSモジュールをES6に変換
             typescript({
-                declaration: true,
-                rootDir: "src",
                 declarationDir: "dist/umd",
             }),
             commonjs(),
@@ -56,8 +54,6 @@ export default [
 
         plugins: [
             typescript({
-                declaration: true,
-                rootDir: "src",
                 declarationDir: "dist/esm",
             }),
             terser({output: {comments: /@license/i}}),
