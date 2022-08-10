@@ -1,6 +1,6 @@
 {
   "name": "hiroshi",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "jsx support simply dom builder",
   "main": "dist/esm/index.js",
   "type": "module",
@@ -15,7 +15,7 @@
     "type": "git",
     "url": "git+https://github.com/kato83/hiroshi.git"
   },
-  "keywords": [],
+  "keywords": ["jsx", "dom"],
   "author": "Yuki Kato <katomeganeb83@gmail.com>",
   "license": "MIT",
   "bugs": {
