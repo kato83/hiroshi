@@ -10,6 +10,7 @@
 <div id="app"></div>
 <script type="module">
     import {createElement as h} from './src/index.ts';
+    import {dom} from './example/sample.tsx';
 
     const element = h('div', null, ...[
         h(
@@ -27,6 +28,7 @@
     ]);
 
     document.body.append(element);
+    document.body.append(dom);
 </script>
 </body>
 </html>
