@@ -2,7 +2,7 @@
 
 ![npm](https://img.shields.io/npm/v/hiroshi)
 ![NPM](https://img.shields.io/npm/l/hiroshi)
-[![size](http://img.badgesize.io/https://unpkg.com/hiroshi@latest/dist/esm/hiroshi.js?compression=gzip&label=size)](https://unpkg.com/hiroshi@latest/dist/esm/hiroshi.js)
+[![size](http://img.badgesize.io/https://unpkg.com/hiroshi@latest/dist/esm/hiroshi.js?label=size)](https://unpkg.com/hiroshi@latest/dist/esm/hiroshi.js)
 [![gzip size](http://img.badgesize.io/https://unpkg.com/hiroshi@latest/dist/esm/hiroshi.js?compression=gzip&label=gzip+size)](https://unpkg.com/hiroshi@latest/dist/esm/hiroshi.js)
 
 [English Document | 英語ドキュメント](./README.md)
