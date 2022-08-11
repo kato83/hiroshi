@@ -14,17 +14,16 @@ export const createElement = (
   attributes: { [p: string]: unknown } = {},
   ...children: any
 ): Node => {
-  const elm = (typeof nodeName === 'string') ? document.createElement(nodeName)
+  const elm = isString(nodeName) ? document.createElement(nodeName)
     : nodeName({children: children, ...attributes}) as Element;
 
-  if (typeof nodeName === 'string') {
+  if (isString(nodeName)) {
     applyAttributes(elm, attributes);
   }
 
-  const displayChildren = children.flat()
-    .filter(c => isNotNullable(c) && typeof c !== 'boolean');
-
-  if (typeof nodeName === 'string' || Object.is(nodeName, Fragment)) {
+  if (isString(nodeName) || Object.is(nodeName, Fragment)) {
+    const displayChildren = children.flat()
+      .filter(c => isNotNullable(c) && typeof c !== 'boolean');
     elm.append(...displayChildren);
   }
 
@@ -85,6 +84,7 @@ const builtinEventMapping = (key: string) =>
 
 const isNotNullable = (arg: any) => typeof arg !== 'undefined' && arg !== null;
 const isObject = (arg): arg is object => typeof arg === 'object' && arg !== null;
+const isString = (arg): arg is string => typeof arg === 'string';
 const isMaybeEvent = (key: string) => key.startsWith('on') && isNotNullable(key[2]);
 
 /**
