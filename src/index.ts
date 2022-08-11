@@ -10,50 +10,57 @@
  * @param children rest parameter children
  */
 export const createElement = (
-    nodeName: string | ((...props) => Element),
-    attributes: { [p: string]: unknown } = {},
-    ...children: any
+  nodeName: string | ((...props) => Element),
+  attributes: { [p: string]: unknown } = {},
+  ...children: any
 ): Node => {
-    const elm = (typeof nodeName === 'string') ? document.createElement(nodeName)
-        : nodeName({children: children, ...attributes}) as Element;
+  const elm = (typeof nodeName === 'string') ? document.createElement(nodeName)
+    : nodeName({children: children, ...attributes}) as Element;
 
-    if (typeof nodeName === 'string') {
-        applyAttributes(elm, attributes);
-    }
+  if (typeof nodeName === 'string') {
+    applyAttributes(elm, attributes);
+  }
 
-    const displayChildren = children.flat()
-        .filter(c => isNotNullable(c) && typeof c !== 'boolean');
-    elm.append(...displayChildren);
-    return elm;
+  const displayChildren = children.flat()
+    .filter(c => isNotNullable(c) && typeof c !== 'boolean');
+  elm.append(...displayChildren);
+  return elm;
 };
 
 const applyAttributes = (elm: Element, attributes: { [p: string]: unknown } = {}) => {
-    for (const attribute in attributes) {
-        const value = attributes[attribute];
+  for (const attribute in attributes) {
+    const value = attributes[attribute];
 
-        // style property
-        if (attribute === 'style' && typeof value === 'object') {
-            for (const property in value) {
-                (elm as HTMLElement).style[property] = value[property];
-            }
-        }
-        // builtin event property
-        else if (typeof elm[builtinEventMapping(attribute)] !== 'undefined') {
-            elm[builtinEventMapping(attribute)] = value;
-        }
-        // custom event property
-        else if (isMaybeEvent(attribute)) {
-            elm.addEventListener(
-                attribute.substring(2),
-                value as EventListenerOrEventListenerObject);
-        }
-        // other attribute (aria-*, data-* attribute, etc.)
-        else if (isNotNullable(value) && value !== false) {
-            elm.setAttribute(
-                camel2KebabCase(attribute),
-                value === true ? '' : value as string);
-        }
+    // ref
+    if (attribute === 'ref'
+      && value
+      && isObject(value)
+      && 'current' in value) {
+      value['current'] = elm;
     }
+    // style property
+    else if (attribute === 'style' && isObject(value)) {
+      for (const property in value) {
+        (elm as HTMLElement).style[property] = value[property];
+      }
+    }
+    // builtin event property
+    else if (typeof elm[builtinEventMapping(attribute)] !== 'undefined') {
+      elm[builtinEventMapping(attribute)] = value;
+    }
+    // custom event property
+    else if (isMaybeEvent(attribute)) {
+      elm.addEventListener(
+        attribute.substring(2),
+        value as EventListenerOrEventListenerObject);
+    }
+    // other attribute (aria-*, data-* attribute, etc.)
+    else if (isNotNullable(value) && value !== false) {
+      elm.setAttribute(
+        camel2KebabCase(attribute),
+        value === true ? '' : value as string);
+    }
+  }
 };
 
 /**
@@ -61,15 +68,19 @@ const applyAttributes = (elm: Element, attributes: { [p: string]: unknown } = {}
  */
 export const Fragment = () => document.createDocumentFragment();
 
+export const createRef = <T extends Node>(initialVale?: T) => {
+  return Object.seal({current: initialVale ?? null});
+};
+
 const builtinEventMapping = (key: string) =>
-    (isMaybeEvent(key)) ?
-        key.toLowerCase() :
-        {
-            // If special dom property mappings are required, they should be added.
-        }[key] ?? key;
+  (isMaybeEvent(key)) ?
+    key.toLowerCase() :
+    {
+      // If special dom property mappings are required, they should be added.
+    }[key] ?? key;
 
 const isNotNullable = (arg: any) => typeof arg !== 'undefined' && arg !== null;
-
+const isObject = (arg): arg is object => typeof arg === 'object' && arg !== null;
 const isMaybeEvent = (key: string) => key.startsWith('on') && isNotNullable(key[2]);
 
 /**
