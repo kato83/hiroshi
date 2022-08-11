@@ -12,22 +12,22 @@
     import {createElement as h} from './index.ts';
     import {dom} from '../example/sample.tsx';
 
-    const element = h('div', null, ...[
-        h(
-            'button',
-            {
-                className: 'hoge',
-                type: 'button',
-                onClick: (e) => console.log(e),
-                style: {marginBottom: '1rem', background: '#ffccaa'}
-            },
-            'TEST'
-        ),
-        h('div', null, ...['aa', 'bb'].map(item => h('p', null, item))),
-        h('div', {style: 'background: #ffccaa'}, 'TEST'),
-    ]);
+    // const element = h('div', null, ...[
+    //     h(
+    //         'button',
+    //         {
+    //             className: 'hoge',
+    //             type: 'button',
+    //             onClick: (e) => console.log(e),
+    //             style: {marginBottom: '1rem', background: '#ffccaa'}
+    //         },
+    //         'TEST'
+    //     ),
+    //     h('div', null, ...['aa', 'bb'].map(item => h('p', null, item))),
+    //     h('div', {style: 'background: #ffccaa'}, 'TEST'),
+    // ]);
 
-    document.body.append(element);
+    // document.body.append(element);
     document.body.append(dom);
 </script>
 </body>

@@ -23,7 +23,11 @@ export const createElement = (
 
   const displayChildren = children.flat()
     .filter(c => isNotNullable(c) && typeof c !== 'boolean');
-  elm.append(...displayChildren);
+
+  if (typeof nodeName === 'string' || Object.is(nodeName, Fragment)) {
+    elm.append(...displayChildren);
+  }
+
   return elm;
 };
 
