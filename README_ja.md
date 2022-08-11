@@ -14,10 +14,10 @@ DOM を作成することのみに焦点を当てているため、様々な案�
 
 ```text
 ▼ UMD format
-https://cdn.jsdelivr.net/npm/hiroshi@latest/dist/umd/hiroshi.js  
+https://cdn.jsdelivr.net/npm/hiroshi@latest/dist/umd/hiroshi.js
 https://unpkg.com/hiroshi@latest/dist/umd/hiroshi.js
 ▼ ESM format
-https://cdn.jsdelivr.net/npm/hiroshi@latest/dist/esm/hiroshi.js  
+https://cdn.jsdelivr.net/npm/hiroshi@latest/dist/esm/hiroshi.js
 https://unpkg.com/hiroshi@latest/dist/esm/hiroshi.js
 ```
 

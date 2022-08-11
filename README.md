@@ -14,10 +14,10 @@ It can be used in a wide variety of projects and situations, as it focuses solel
 
 ```text
 ▼ UMD format
-https://cdn.jsdelivr.net/npm/hiroshi@latest/dist/umd/hiroshi.js  
+https://cdn.jsdelivr.net/npm/hiroshi@latest/dist/umd/hiroshi.js
 https://unpkg.com/hiroshi@latest/dist/umd/hiroshi.js
 ▼ ESM format
-https://cdn.jsdelivr.net/npm/hiroshi@latest/dist/esm/hiroshi.js  
+https://cdn.jsdelivr.net/npm/hiroshi@latest/dist/esm/hiroshi.js
 https://unpkg.com/hiroshi@latest/dist/esm/hiroshi.js
 ```
 

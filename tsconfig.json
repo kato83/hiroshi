@@ -13,7 +13,7 @@
     "sourceMap": true,
     "jsx": "preserve",
     "jsxFactory": "createElement",
-    "jsxFragmentFactory": "createFragment",
+    "jsxFragmentFactory": "Fragment",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "esModuleInterop": true,

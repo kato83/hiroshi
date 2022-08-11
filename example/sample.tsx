@@ -1,15 +1,15 @@
-import {createElement} from "../src";
+import {createElement, Fragment} from "../src";
 
 const names = ["Sato", "Kato", "Suzuki", "Joseph"];
 
-export const dom = (
-    <div className="sample">
-        <span>This is sample.</span>
-        <div>
-            Names:
-            {names.map((name) => (
-                <span>{names.map(name => <span>{name}</span>)}</span>
-            ))}
-        </div>
-    </div>
-);
+const Card = (props) => {
+    return <div dataSample={props.sample}>{props.children}</div>
+}
+
+export const dom = <div>
+    Names:
+    {names.map((name) => (<>
+            <Card sample={'aaaa'}><span>{name}</span></Card>
+        </>
+    ))}
+</div>;

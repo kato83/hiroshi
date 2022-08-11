@@ -3,17 +3,6 @@
  * https://github.com/kato83/hiroshi/blob/master/LICENSE.txt
  */
 
-const builtinEventMapping = (key: string) =>
-    (isMaybeEvent(key)) ?
-        key.toLowerCase() :
-        {
-            // If special dom property mappings are required, they should be added.
-        }[key] ?? key;
-
-const isNotNullable = arg => typeof arg !== 'undefined' && arg !== null;
-
-const isMaybeEvent = key => key.startsWith('on') && key[2];
-
 /**
  * Build element.
  * @param nodeName element name or Component function
@@ -21,13 +10,24 @@ const isMaybeEvent = key => key.startsWith('on') && key[2];
  * @param children rest parameter children
  */
 export const createElement = (
-    nodeName: string | (() => Element),
+    nodeName: string | ((...props) => Element),
     attributes: { [p: string]: unknown } = {},
     ...children: any
 ): Node => {
     const elm = (typeof nodeName === 'string') ? document.createElement(nodeName)
-        : nodeName.apply(null) as Element;
+        : nodeName({children: children, ...attributes}) as Element;
 
+    if (typeof nodeName === 'string') {
+        applyAttributes(elm, attributes);
+    }
+
+    const displayChildren = children.flat()
+        .filter(c => isNotNullable(c) && typeof c !== 'boolean');
+    elm.append(...displayChildren);
+    return elm;
+};
+
+const applyAttributes = (elm: Element, attributes: { [p: string]: unknown } = {}) => {
     for (const attribute in attributes) {
         const value = attributes[attribute];
 
@@ -54,17 +54,23 @@ export const createElement = (
                 value === true ? '' : value as string);
         }
     }
-
-    const displayChildren = children.flat()
-        .filter(c => isNotNullable(c) && typeof c !== 'boolean');
-    elm.append(...displayChildren);
-    return elm;
 };
 
 /**
  * create document fragment.
  */
 export const Fragment = () => document.createDocumentFragment();
+
+const builtinEventMapping = (key: string) =>
+    (isMaybeEvent(key)) ?
+        key.toLowerCase() :
+        {
+            // If special dom property mappings are required, they should be added.
+        }[key] ?? key;
+
+const isNotNullable = (arg: any) => typeof arg !== 'undefined' && arg !== null;
+
+const isMaybeEvent = (key: string) => key.startsWith('on') && isNotNullable(key[2]);
 
 /**
  * convert camel case to kebab case.
