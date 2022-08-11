@@ -1,7 +1,7 @@
 # Hiroshi JS
 
-![npm](https://img.shields.io/npm/v/hiroshi)
-![NPM](https://img.shields.io/npm/l/hiroshi)
+[![npm](https://img.shields.io/npm/v/hiroshi)](https://www.npmjs.com/package/hiroshi)
+[![NPM](https://img.shields.io/npm/l/hiroshi)](https://github.com/kato83/hiroshi/blob/master/LICENSE.txt)
 [![size](http://img.badgesize.io/https://unpkg.com/hiroshi@latest/dist/esm/hiroshi.js?label=size)](https://unpkg.com/hiroshi@latest/dist/esm/hiroshi.js)
 [![gzip size](http://img.badgesize.io/https://unpkg.com/hiroshi@latest/dist/esm/hiroshi.js?compression=gzip&label=gzip+size)](https://unpkg.com/hiroshi@latest/dist/esm/hiroshi.js)
 
