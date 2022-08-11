@@ -1,4 +1,4 @@
-import {createRef} from "../src";
+import {createElement, Fragment, createRef} from "../src";
 
 const names = ["Sato", "Kato", "Suzuki", "Joseph"];
 
