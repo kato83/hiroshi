@@ -34,6 +34,8 @@ A sample of JSX in action can be seen below.
 
 [Hiroshi JS Example for ES Module x JSX](https://codepen.io/kato83/pen/zYWLPMP)
 
+The following two different source codes both produce the same display results.
+
 ### ES Module with JSX.
 
 ```shell
@@ -74,7 +76,7 @@ document.getElementById('app').appendChild(UserList());
 ### Universal Module Definition without JSX
 
 ```html
-<script src="https://unpkg.com/hiroshi@latest/dist/umd/hiroshi.js"></script>
+<script src="//unpkg.com/hiroshi@latest/dist/umd/hiroshi.js"></script>
 <script type="text/javascript">
   const {createElement, Fragment, createRef} = Hiroshi;
   const c = createElement;

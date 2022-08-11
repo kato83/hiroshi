@@ -34,6 +34,8 @@ JSX を実際に使用したサンプルは以下から確認できます。
 
 [Hiroshi JS Example for ES Module x JSX](https://codepen.io/kato83/pen/zYWLPMP)
 
+以下2つの異なるソースコードは、どちらも同じ表示結果となります。
+
 ### ES Module かつ JSX を使用した例
 
 ```shell
@@ -74,7 +76,7 @@ document.getElementById('app').appendChild(UserList());
 ### ES Module を用いて JSX を使用しない例
 
 ```html
-<script src="https://unpkg.com/hiroshi@latest/dist/umd/hiroshi.js"></script>
+<script src="//unpkg.com/hiroshi@latest/dist/umd/hiroshi.js"></script>
 <script type="text/javascript">
   const {createElement, Fragment, createRef} = Hiroshi;
   const c = createElement;
