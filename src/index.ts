@@ -15,11 +15,7 @@ export const createElement = (
   ...children: any
 ): Node => {
   const elm = isString(nodeName) ? document.createElement(nodeName)
-    : nodeName({children: children, ...attributes}) as Element;
-
-  if (isString(nodeName)) {
-    applyAttributes(elm, attributes);
-  }
+    : nodeName({children: children, ...attributes ?? {}}) as Element;
 
   if (isString(nodeName) || Object.is(nodeName, Fragment)) {
     const displayChildren = children.flat()
@@ -27,29 +23,28 @@ export const createElement = (
     elm.append(...displayChildren);
   }
 
+  if (isString(nodeName)) {
+    applyAttributes(elm, attributes);
+  }
+
   return elm;
 };
 
 const applyAttributes = (elm: Element, attributes: { [p: string]: unknown } = {}) => {
-  for (const attribute in attributes) {
-    const value = attributes[attribute];
+  const {ref, ...otherAttributes} = attributes ?? {};
 
-    // ref
-    if (attribute === 'ref'
-      && value
-      && isObject(value)
-      && 'current' in value) {
-      value['current'] = elm;
-    }
+  for (const attribute in otherAttributes) {
+    const value = otherAttributes[attribute];
+
     // style property
-    else if (attribute === 'style' && isObject(value)) {
+    if (attribute === 'style' && isObject(value)) {
       for (const property in value) {
         (elm as HTMLElement).style[property] = value[property];
       }
     }
     // builtin event property
-    else if (typeof elm[builtinEventMapping(attribute)] !== 'undefined') {
-      elm[builtinEventMapping(attribute)] = value;
+    else if (typeof elm[attributeMapping(attribute)] !== 'undefined') {
+      elm[attributeMapping(attribute)] = value;
     }
     // custom event property
     else if (isMaybeEvent(attribute)) {
@@ -64,6 +59,13 @@ const applyAttributes = (elm: Element, attributes: { [p: string]: unknown } = {}
         value === true ? '' : value as string);
     }
   }
+
+  // ref
+  if (isObject(ref) && 'current' in ref) {
+    ref['current'] = elm;
+  } else if (isFunction(ref)) {
+    ref(elm);
+  }
 };
 
 /**
@@ -75,7 +77,7 @@ export const createRef = <T extends Node>(initialVale?: T) => {
   return Object.seal({current: initialVale ?? null});
 };
 
-const builtinEventMapping = (key: string) =>
+const attributeMapping = (key: string) =>
   (isMaybeEvent(key)) ?
     key.toLowerCase() :
     {
@@ -85,6 +87,7 @@ const builtinEventMapping = (key: string) =>
 const isNotNullable = (arg: any) => typeof arg !== 'undefined' && arg !== null;
 const isObject = (arg): arg is object => typeof arg === 'object' && arg !== null;
 const isString = (arg): arg is string => typeof arg === 'string';
+const isFunction = (arg): arg is Function => typeof arg === 'function';
 const isMaybeEvent = (key: string) => key.startsWith('on') && isNotNullable(key[2]);
 
 /**
