@@ -105,6 +105,6 @@ React.render(<UserList/>, document.getElementById('app'));
     ]);
   };
 
-  render(c(UserList, document.getElementById('app')));
+  render(c(UserList), document.getElementById('app'));
 </script>
 ```

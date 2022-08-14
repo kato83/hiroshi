@@ -105,6 +105,6 @@ document.getElementById('app').appendChild(UserList());
     ]);
   };
 
-  render(c(UserList, document.getElementById('app')));
+  render(c(UserList), document.getElementById('app'));
 </script>
 ```
