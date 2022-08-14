@@ -43,9 +43,9 @@ $ npm i hiroshi
 ```
 
 ```jsx
-// option 1: 当ライブラリを React として読み込ませる.
+// option 1: Load hiroshi as react for jsx transpile.
 import * as React from 'hiroshi';
-// option 2: babel や typescript の jsx トランスパイル設定を適切に変更して読み込む
+// option 2: Properly configure babel and typescript and load as hiroshi.
 // import {createElement, createRef, Fragment} from 'hiroshi';
 
 const Card = (props) => <div className='card'>
@@ -58,13 +58,13 @@ const UserList = () => {
     .then(res => {
       const {current} = ref;
       current.replaceChild(
-        <>{res.map(({name, other}) => 
+        <>{res.map(({name, other}) =>
           <Card name={name}>{other}</Card>
         )}</>,
         current.firstElementChild
       );
     });
-  
+
   return <div className={'userList'} ref={ref}>
     <span>Now loading...</span>
   </div>
@@ -78,12 +78,12 @@ document.getElementById('app').appendChild(UserList());
 ```html
 <script src="//unpkg.com/hiroshi@latest/dist/umd/hiroshi.js"></script>
 <script type="text/javascript">
-  const {createElement, Fragment, createRef} = Hiroshi;
-  const c = createElement;
-  
-  const Card = (props) => c('div', {className: 'card'}, ...[
+  const {createElement, Fragment, createRef, render} = Hiroshi;
+  const h = createElement;
+
+  const Card = (props) => h('div', {className: 'card'}, ...[
     props.name,
-    c('br'),
+    h('br'),
     props.children
   ]);
 
@@ -93,18 +93,18 @@ document.getElementById('app').appendChild(UserList());
       .then(res => {
         const {current} = ref;
         current.replaceChild(
-          c(Fragment, null, ...res.map(({name, other}) => 
-            c(Card, {name: name}, other)
+          h(Fragment, null, ...res.map(({name, other}) =>
+            h(Card, {name: name}, other)
           )),
           current.firstElementChild
         );
       });
 
-    return c('div', {className: 'userList', ref: ref}, ...[
-      c('span', {}, 'Now loading...')  
+    return h('div', {className: 'userList', ref: ref}, ...[
+      h('span', {}, 'Now loading...')
     ]);
   };
 
-  document.getElementById('app').appendChild(UserList());
+  render(c(UserList, document.getElementById('app')));
 </script>
 ```

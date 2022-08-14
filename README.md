@@ -70,7 +70,7 @@ const UserList = () => {
   </div>
 };
 
-document.getElementById('app').appendChild(UserList());
+React.render(<UserList/>, document.getElementById('app'));
 ```
 
 ### Universal Module Definition without JSX
@@ -78,12 +78,12 @@ document.getElementById('app').appendChild(UserList());
 ```html
 <script src="//unpkg.com/hiroshi@latest/dist/umd/hiroshi.js"></script>
 <script type="text/javascript">
-  const {createElement, Fragment, createRef} = Hiroshi;
-  const c = createElement;
+  const {createElement, Fragment, createRef, render} = Hiroshi;
+  const h = createElement;
   
-  const Card = (props) => c('div', {className: 'card'}, ...[
+  const Card = (props) => h('div', {className: 'card'}, ...[
     props.name,
-    c('br'),
+    h('br'),
     props.children
   ]);
 
@@ -93,18 +93,18 @@ document.getElementById('app').appendChild(UserList());
       .then(res => {
         const {current} = ref;
         current.replaceChild(
-          c(Fragment, null, ...res.map(({name, other}) => 
-            c(Card, {name: name}, other)
+          h(Fragment, null, ...res.map(({name, other}) => 
+            h(Card, {name: name}, other)
           )),
           current.firstElementChild
         );
       });
 
-    return c('div', {className: 'userList', ref: ref}, ...[
-      c('span', {}, 'Now loading...')  
+    return h('div', {className: 'userList', ref: ref}, ...[
+      h('span', {}, 'Now loading...')  
     ]);
   };
 
-  document.getElementById('app').appendChild(UserList());
+  render(c(UserList, document.getElementById('app')));
 </script>
 ```
