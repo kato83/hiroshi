@@ -16,3 +16,37 @@ export const Hoge = <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512
 export const result = () => {
   render(Hoge(), document.body);
 };
+
+export function App() {
+  const ref = (node) => fetch('//jsonplaceholder.typicode.com/photos')
+    .then(res => res.json())
+    .then(res => {
+      render(users(res), node);
+    });
+
+  const users = (users) => {
+    return <>{users.map(user => <Card2 name={user.title}>{user.title}</Card2>)}</>
+  }
+
+  return (
+    <div className="App" ref={ref}>
+    </div>
+  )
+}
+
+const style = {
+  marginBottom: "0.5rem",
+  border: "solid 1px #aaa",
+  padding: ".5rem",
+  flexBasis: "12rem"
+}
+
+export function Card2(props: any) {
+  return <div className="card" style={style}>
+    {props.name}: {props.children}
+  </div>
+}
+
+export const result2 = () => {
+  render(App(), document.body);
+};

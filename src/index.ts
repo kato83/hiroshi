@@ -10,15 +10,16 @@
  * @param children rest parameter children
  */
 export const createElement = (
-  nodeName: string | ((...props) => Element),
+  nodeName: string | ((...props) => (...props) => Element),
   attributes: { [p: string]: unknown } = {},
   ...children: any
 ): ((ns?: string) => Node) => {
   const {xmlns, ...otherAttributes} = attributes ?? {};
 
   return (ns) => {
-    const elm = isString(nodeName) ? document.createElementNS((xmlns ?? ns) as string, nodeName)
-      : nodeName({children: children, ...attributes ?? {}}) as Element;
+    const elm = isString(nodeName) ?
+      document.createElementNS((xmlns ?? ns ?? 'http://www.w3.org/1999/xhtml') as string, nodeName)
+      : nodeName({children: children, ...attributes ?? {}})() as Element;
 
     if (isString(nodeName) || Object.is(nodeName, Fragment)) {
       const displayChildren = children.flat()
@@ -77,7 +78,7 @@ const applyAttributes = (elm: Element, attributes: { [p: string]: unknown } = {}
 /**
  * create document fragment.
  */
-export const Fragment = () => document.createDocumentFragment();
+export const Fragment = () => () => document.createDocumentFragment();
 
 export const createRef = <T extends Node>(initialVale?: T) => {
   return Object.seal({current: initialVale ?? null});
