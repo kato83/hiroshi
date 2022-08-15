@@ -6,7 +6,7 @@ import babel from 'rollup-plugin-babel';
 
 export default [
     {
-        input: 'src/index.ts',
+        input: 'src/hiroshi.ts',
         // 出力指定
         output: {
             dir: "dist/umd",
@@ -42,7 +42,7 @@ export default [
         ]
     },
     {
-        input: "src/index.ts",
+        input: "src/hiroshi.ts",
         preserveModules: true,
         output: {
             dir: "dist/esm",
