@@ -3,7 +3,9 @@
  * https://github.com/kato83/hiroshi/blob/master/LICENSE.txt
  */
 
-import {createElement as c} from "./@types/hiroshi";
+import type {createElement as aa} from './jsx.d';
+
+export {createElement as h};
 
 /**
  * Build element.
@@ -14,8 +16,8 @@ import {createElement as c} from "./@types/hiroshi";
 export const createElement = (
   nodeName: string | ((...props) => (...props) => Element),
   attributes: { [p: string]: unknown } = {},
-  ...children: any
-): c.JSX.Element => {
+  ...children: any[]
+): aa.JSX.Element => {
   const {xmlns, ...otherAttributes} = attributes ?? {};
 
   return (ns) => {
@@ -37,8 +39,6 @@ export const createElement = (
     return elm;
   };
 };
-
-export const h = createElement;
 
 const applyAttributes = (elm: Element, attributes: { [p: string]: unknown } = {}) => {
   const {ref, ...otherAttributes} = attributes ?? {};
@@ -93,7 +93,7 @@ export const createRef = <T extends Node>(initialVale?: T) => {
  * @param node
  * @param entryPoint Output location for the object passed in the node argument.
  */
-export const render = (node: c.JSX.Element, entryPoint: HTMLElement) => {
+export const render = (node: aa.JSX.Element, entryPoint: HTMLElement) => {
   const result = isFunction(node) ? node() : node;
   entryPoint.appendChild(isFunction(result) ? result() : result);
 };
