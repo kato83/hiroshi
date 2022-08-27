@@ -12,7 +12,7 @@
     "strict": true,
     "sourceMap": true,
     "jsx": "preserve",
-    "jsxFactory": "createElement",
+    "jsxFactory": "h",
     "jsxFragmentFactory": "Fragment",
     "resolveJsonModule": true,
     "isolatedModules": true,
@@ -23,9 +23,16 @@
     "noImplicitReturns": true,
     "skipLibCheck": true,
     "declaration": true,
-    "rootDir": "src"
+    "rootDir": "src",
+    "baseUrl": ".",
+    "paths": {
+      "*": [
+        "@types/*"
+      ]
+    }
   },
   "include": [
-    "src"
+    "src/**/*.ts",
+    "src/types/**/*.d.ts"
   ]
 }

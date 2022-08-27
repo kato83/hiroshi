@@ -1,13 +1,13 @@
 {
   "name": "hiroshi",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "jsx support simply dom builder",
   "main": "dist/esm/hiroshi.js",
-  "types": "dist/esm/index.d.ts",
+  "types": "dist/esm/hiroshi.d.ts",
   "type": "module",
   "exports": {
     ".": {
-      "types": "./dist/esm/index.d.ts",
+      "types": "./dist/esm/hiroshi.d.ts",
       "browser": "./dist/esm/hiroshi.js",
       "umd": "./dist/umd/hiroshi.js",
       "require": "./dist/umd/hiroshi.js",
