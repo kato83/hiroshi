@@ -9,11 +9,11 @@
  * @param attributes attributes
  * @param children rest parameter children
  */
-export const createElement = (
+export function createElement(
   nodeName: string | ((...props) => (...props) => Element),
   attributes: { [p: string]: unknown } = {},
   ...children: any[]
-): createElement.JSX.Element => {
+): createElement.JSX.Element {
   const {xmlns, ...otherAttributes} = attributes ?? {};
 
   return (ns) => {
@@ -34,9 +34,7 @@ export const createElement = (
 
     return elm;
   };
-};
-
-export {createElement as h};
+}
 
 const applyAttributes = (elm: Element, attributes: { [p: string]: unknown } = {}) => {
   const {ref, ...otherAttributes} = attributes ?? {};
@@ -114,10 +112,22 @@ const isMaybeEvent = (key: string) => key.startsWith('on') && isNotNullable(key[
  */
 const camel2KebabCase = (str: string) => str.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`);
 
+export function h(
+  nodeName: string | ((...props) => (...props) => Element),
+  attributes: { [p: string]: unknown } = {},
+  ...children: any[]
+): createElement.JSX.Element {
+  return createElement(nodeName, attributes, ...children);
+}
+
 /**
  * Apply from React TypeScript definition
  * @see https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/react/index.d.ts
  */
+export namespace h {
+  export import JSX = createElement.JSX;
+}
+
 export namespace createElement {
   export namespace JSX {
     export type Element = (namespace?: string) => Node;
