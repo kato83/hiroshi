@@ -1,6 +1,6 @@
 {
   "name": "hiroshi",
-  "version": "0.1.7",
+  "version": "0.1.6",
   "description": "jsx support simply dom builder",
   "main": "dist/esm/hiroshi.js",
   "types": "dist/esm/hiroshi.d.ts",
@@ -17,9 +17,7 @@
   "scripts": {
     "dev": "vite",
     "preview": "vite preview",
-    "cp-esm": "cp ./src/jsx.d.ts ./dist/esm/",
-    "cp-umd": "cp ./src/jsx.d.ts ./dist/umd/",
-    "prepublishOnly": "npm run build && npm run cp-esm && npm run cp-umd",
+    "prepublishOnly": "npm run build",
     "build": "rollup -c"
   },
   "repository": {
