@@ -26,13 +26,3 @@ export function Card(props: any) {
 }
 
 export const display = () => render(<App/>, document.body);
-
-namespace JSX {
-  // JSX stuff goes in here.
-}
-export { /*...*/ }
-
-import Temp_JSX = JSX;
-declare namespace Hoge{
-  import JSX = Temp_JSX;
-}

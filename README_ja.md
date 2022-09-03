@@ -46,7 +46,7 @@ $ npm i hiroshi
 // option 1: Load hiroshi as react for jsx transpile.
 import * as React from 'hiroshi';
 // option 2: Properly configure babel and typescript and load as hiroshi.
-// import {createElement, createRef, Fragment} from 'hiroshi';
+// import {createElement, createRef, Fragment, render} from 'hiroshi';
 
 const Card = (props) => <div className='card'>
   {props.name}<br/>{props.children}
@@ -58,9 +58,9 @@ const UserList = () => {
     .then(res => {
       const {current} = ref;
       current.replaceChild(
-        <>{res.map(({name, other}) =>
+        React.render(<>{res.map(({name, other}) =>
           <Card name={name}>{other}</Card>
-        )}</>,
+        )}</>, current),
         current.firstElementChild
       );
     });
@@ -70,7 +70,7 @@ const UserList = () => {
   </div>
 };
 
-document.getElementById('app').appendChild(UserList());
+React.render(<UserList/>, document.getElementById('app'));
 ```
 
 ### ES Module を用いて JSX を使用しない例
@@ -78,8 +78,7 @@ document.getElementById('app').appendChild(UserList());
 ```html
 <script src="//unpkg.com/hiroshi@latest/dist/umd/hiroshi.js"></script>
 <script type="text/javascript">
-  const {createElement, Fragment, createRef, render} = Hiroshi;
-  const h = createElement;
+  const {h, Fragment, createRef, render} = Hiroshi;
 
   const Card = (props) => h('div', {className: 'card'}, ...[
     props.name,
@@ -93,9 +92,9 @@ document.getElementById('app').appendChild(UserList());
       .then(res => {
         const {current} = ref;
         current.replaceChild(
-          h(Fragment, null, ...res.map(({name, other}) =>
+          render(h(Fragment, null, ...res.map(({name, other}) =>
             h(Card, {name: name}, other)
-          )),
+          )), current),
           current.firstElementChild
         );
       });
@@ -105,6 +104,6 @@ document.getElementById('app').appendChild(UserList());
     ]);
   };
 
-  render(c(UserList), document.getElementById('app'));
+  render(h(UserList), document.getElementById('app'));
 </script>
 ```

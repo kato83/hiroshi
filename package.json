@@ -1,6 +1,6 @@
 {
   "name": "hiroshi",
-  "version": "0.1.9",
+  "version": "0.2.0",
   "description": "jsx support simply dom builder",
   "main": "dist/esm/hiroshi.js",
   "types": "dist/esm/hiroshi.d.ts",
@@ -18,6 +18,7 @@
     "dev": "vite",
     "preview": "vite preview",
     "prepublishOnly": "npm run build",
+    "zip": "cd dist/ && zip -r ../hiroshi_v$(node -e \"console.log(require('../package.json').version)\").zip ./*",
     "build": "rollup -c"
   },
   "repository": {

@@ -46,7 +46,7 @@ $ npm i hiroshi
 // option 1: Load hiroshi as react for jsx transpile.
 import * as React from 'hiroshi';
 // option 2: Properly configure babel and typescript and load as hiroshi.
-// import {createElement, createRef, Fragment} from 'hiroshi';
+// import {createElement, createRef, Fragment, render} from 'hiroshi';
 
 const Card = (props) => <div className='card'>
   {props.name}<br/>{props.children}
@@ -58,13 +58,13 @@ const UserList = () => {
     .then(res => {
       const {current} = ref;
       current.replaceChild(
-        <>{res.map(({name, other}) => 
+        React.render(<>{res.map(({name, other}) =>
           <Card name={name}>{other}</Card>
-        )}</>,
+        )}</>, current),
         current.firstElementChild
       );
     });
-  
+
   return <div className={'userList'} ref={ref}>
     <span>Now loading...</span>
   </div>
@@ -78,9 +78,8 @@ React.render(<UserList/>, document.getElementById('app'));
 ```html
 <script src="//unpkg.com/hiroshi@latest/dist/umd/hiroshi.js"></script>
 <script type="text/javascript">
-  const {createElement, Fragment, createRef, render} = Hiroshi;
-  const h = createElement;
-  
+  const {h, Fragment, createRef, render} = Hiroshi;
+
   const Card = (props) => h('div', {className: 'card'}, ...[
     props.name,
     h('br'),
@@ -93,18 +92,18 @@ React.render(<UserList/>, document.getElementById('app'));
       .then(res => {
         const {current} = ref;
         current.replaceChild(
-          h(Fragment, null, ...res.map(({name, other}) => 
+          render(h(Fragment, null, ...res.map(({name, other}) =>
             h(Card, {name: name}, other)
-          )),
+          )), current),
           current.firstElementChild
         );
       });
 
     return h('div', {className: 'userList', ref: ref}, ...[
-      h('span', {}, 'Now loading...')  
+      h('span', {}, 'Now loading...')
     ]);
   };
 
-  render(c(UserList), document.getElementById('app'));
+  render(h(UserList), document.getElementById('app'));
 </script>
 ```
