@@ -195,4 +195,7 @@ export namespace JSX {
     view: ElementAttribute<SVGViewElement>;
   }
 
+  // @ts-ignore Declare variables that have no meaning to avoid the vite type-only import-export problem.
+  // see: https://vitejs.dev/guide/features.html#typescript
+  const _ignore = null;
 }

@@ -3,7 +3,7 @@
  * https://github.com/kato83/hiroshi/blob/master/LICENSE.txt
  */
 
-import type {JSX as JSXInternal} from './jsx';
+import {JSX as JSXInternal} from './jsx';
 
 namespace Hiroshi {
 
@@ -14,8 +14,8 @@ namespace Hiroshi {
    * @param children rest parameter children
    */
   export function createElement(
-    nodeName: string | ((...props) => (...props) => Element),
-    attributes: { [p: string]: unknown } = {},
+    nodeName: string | ((props: any) => JSX.Element),
+    attributes: ({ [p: string]: unknown } | null) = {},
     ...children: any[]
   ): JSX.Element {
     const {xmlns, ...otherAttributes} = attributes ?? {};
@@ -41,7 +41,7 @@ namespace Hiroshi {
   }
 
   export import h = Hiroshi.createElement;
-  export import type JSX = JSXInternal;
+  export import JSX = JSXInternal;
 
   /**
    * create document fragment.
@@ -113,7 +113,6 @@ namespace Hiroshi {
    */
   const camel2KebabCase = (str: string) => str.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`);
 
-
 }
 
 const isNotNullable = (arg: any) => typeof arg !== 'undefined' && arg !== null;
@@ -126,14 +125,27 @@ export default Hiroshi;
 export import createRef = Hiroshi.createRef;
 export import render = Hiroshi.render;
 export import Fragment = Hiroshi.Fragment;
-export import createElement = Hiroshi.createElement;
 
-export {createElement as h};
+export function createElement(
+  nodeName: string | ((props: any) => JSXInternal.Element),
+  attributes: ({ [p: string]: unknown } | null) = {},
+  ...children: any[]
+): JSXInternal.Element {
+  return Hiroshi.createElement(nodeName, attributes, ...children)
+}
+
+export function h(
+  nodeName: string | ((props: any) => JSXInternal.Element),
+  attributes: ({ [p: string]: unknown } | null) = {},
+  ...children: any[]
+): JSXInternal.Element {
+  return Hiroshi.h(nodeName, attributes, ...children)
+}
 
 export declare namespace createElement {
-  export import type JSX = Hiroshi.JSX;
+  export import JSX = Hiroshi.JSX;
 }
 
 export declare namespace h {
-  export import type JSX = Hiroshi.JSX;
+  export import JSX = Hiroshi.JSX;
 }
