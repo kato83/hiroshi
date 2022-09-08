@@ -66,14 +66,8 @@ namespace Hiroshi {
         }
       }
       // builtin event property
-      else if (!isString(namespaceURI) && isNotNullable(elm[attributeMapping(attribute)])) {
-        elm[attributeMapping(attribute)] = value;
-      }
-      // custom event property
-      else if (isMaybeEvent(attribute)) {
-        elm.addEventListener(
-          attribute.substring(2),
-          value as EventListenerOrEventListenerObject);
+      else if (isNotNullable(elm[attribute])) {
+        elm[attribute] = value;
       }
       // other attribute (aria-*, data-* attribute, etc.)
       else if (isNotNullable(value) && value !== false) {
@@ -101,13 +95,6 @@ namespace Hiroshi {
     entryPoint.appendChild(isFunction(result) ? result() : result);
   };
 
-  const attributeMapping = (key: string) =>
-    (isMaybeEvent(key)) ?
-      key.toLowerCase() :
-      {
-        // If special dom property mappings are required, they should be added.
-      }[key] ?? key;
-
   /**
    * convert camel case to kebab case.
    */
@@ -119,7 +106,6 @@ const isNotNullable = (arg: any) => typeof arg !== 'undefined' && arg !== null;
 const isObject = (arg): arg is object => typeof arg === 'object' && arg !== null;
 const isString = (arg): arg is string => typeof arg === 'string';
 const isFunction = (arg): arg is Function => typeof arg === 'function';
-const isMaybeEvent = (key: string) => key.startsWith('on') && isNotNullable(key[2]);
 
 export default Hiroshi;
 export import createRef = Hiroshi.createRef;
