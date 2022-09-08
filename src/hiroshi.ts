@@ -13,11 +13,11 @@ namespace Hiroshi {
    * @param attributes attributes
    * @param children rest parameter children
    */
-  export function createElement(
+  export const createElement = (
     nodeName: string | ((props: any) => JSX.Element),
     attributes: ({ [p: string]: unknown } | null) = {},
     ...children: any[]
-  ): JSX.Element {
+  ): JSX.Element => {
     const {xmlns, ...otherAttributes} = attributes ?? {};
 
     return (ns) => {
@@ -101,7 +101,7 @@ namespace Hiroshi {
 
 }
 
-const isNotNullable = (arg: any) => typeof arg !== 'undefined' && arg !== null;
+const isNotNullable = <T>(val: T | undefined | null): val is T => typeof val !== 'undefined' && val !== null;
 const isObject = (arg): arg is object => typeof arg === 'object' && arg !== null;
 const isString = (arg): arg is string => typeof arg === 'string';
 const isFunction = (arg): arg is Function => typeof arg === 'function';
