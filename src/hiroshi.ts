@@ -90,9 +90,8 @@ namespace Hiroshi {
    * @param node
    * @param entryPoint Output location for the object passed in the node argument.
    */
-  export const render = (node: JSX.Element, entryPoint: HTMLElement) => {
-    const result = isFunction(node) ? node() : node;
-    entryPoint.appendChild(isFunction(result) ? result() : result);
+  export const render = (node: JSX.Element, entryPoint?: HTMLElement): Node => {
+    return entryPoint?.appendChild(node()) ?? node();
   };
 
   /**
