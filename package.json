@@ -1,6 +1,6 @@
 {
   "name": "hiroshi",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "jsx support simply dom builder",
   "main": "dist/esm/hiroshi.js",
   "types": "dist/esm/hiroshi.d.ts",
