@@ -5,6 +5,8 @@
 
 import {JSX as JSXInternal} from './jsx';
 
+const htmlNs = 'http://www.w3.org/1999/xhtml';
+
 namespace Hiroshi {
 
   /**
@@ -15,14 +17,14 @@ namespace Hiroshi {
    */
   export const createElement = (
     nodeName: string | ((props: any) => JSX.Element),
-    attributes: ({ [p: string]: unknown } | null) = {},
+    attributes: ({ [p: string]: unknown } | null),
     ...children: any[]
   ): JSX.Element => {
     const {xmlns, ...otherAttributes} = attributes ?? {};
 
     return (ns) => {
       const elm = isString(nodeName) ?
-        document.createElementNS((xmlns ?? ns ?? 'http://www.w3.org/1999/xhtml') as string, nodeName)
+        document.createElementNS((xmlns ?? ns ?? htmlNs) as string, nodeName)
         : nodeName({children: children, ...attributes ?? {}})() as Element;
 
       if (isString(nodeName) || Object.is(nodeName, Fragment)) {
@@ -49,11 +51,11 @@ namespace Hiroshi {
   export const Fragment = () => () => document.createDocumentFragment();
 
   export const createRef = <T extends Node>(initialVale?: T) => {
-    return Object.seal({current: initialVale ?? null});
+    return Object.seal({current: initialVale});
   };
 
-  const applyAttributes = (elm: Element, attributes: { [p: string]: unknown } = {}) => {
-    const {ref, ...otherAttributes} = attributes ?? {};
+  const applyAttributes = (elm: Element, attributes: { [p: string]: unknown }) => {
+    const {ref, ...otherAttributes} = attributes;
     const {namespaceURI} = elm;
 
     for (const attribute in otherAttributes) {
@@ -72,7 +74,7 @@ namespace Hiroshi {
       // other attribute (aria-*, data-* attribute, etc.)
       else if (isNotNullable(value) && value !== false) {
         elm.setAttribute(
-          !isString(namespaceURI) ? camel2KebabCase(attribute) : attribute,
+          namespaceURI === htmlNs ? camel2KebabCase(attribute) : attribute,
           value === true ? '' : value as string);
       }
     }
