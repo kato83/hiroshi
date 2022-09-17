@@ -1,6 +1,7 @@
 hiroshi_v*.zip
 node_modules
 dist
+coverage
 
 # Editor directories and files
 .vscode/*
