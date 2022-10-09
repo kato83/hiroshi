@@ -56,7 +56,6 @@ namespace Hiroshi {
 
   const applyAttributes = (elm: Element, attributes: { [p: string]: unknown }) => {
     const {ref, ...otherAttributes} = attributes;
-    const {namespaceURI} = elm;
 
     for (const attribute in otherAttributes) {
       const value = otherAttributes[attribute];
@@ -73,9 +72,7 @@ namespace Hiroshi {
       }
       // other attribute (aria-*, data-* attribute, etc.)
       else if (isNotNullable(value) && value !== false) {
-        elm.setAttribute(
-          namespaceURI === htmlNs ? camel2KebabCase(attribute) : attribute,
-          value === true ? '' : value as string);
+        elm.setAttribute(attribute, value === true ? '' : value as string);
       }
     }
 
@@ -95,11 +92,6 @@ namespace Hiroshi {
   export const render = (node: JSX.Element, entryPoint?: HTMLElement): Node => {
     return entryPoint?.appendChild(node()) ?? node();
   };
-
-  /**
-   * convert camel case to kebab case.
-   */
-  const camel2KebabCase = (str: string) => str.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`);
 
 }
 
